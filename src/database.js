@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const { MONGO_HOST, MONGO_DB } = process.env;
-const URI = `mongodb://${MONGO_HOST}/${MONGO_DB}`;
+const URI = process.env.URI;
 
 mongoose.connect(URI, {
   useNewUrlParser: true,
@@ -13,5 +12,5 @@ mongoose.connect(URI, {
 const connection = mongoose.connection;
 
 connection.once("open", () => {
-  console.log("database connected");
+  console.log("MongoDB connected");
 });
