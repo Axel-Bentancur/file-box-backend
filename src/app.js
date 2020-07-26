@@ -13,8 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-app.use("/user", require("./routes/user.routes"));
+app.use("/register", require("./routes/register.routes"));
+app.use("/", require("./routes/lobby.routes"));
+
+/* app.use("/user", require("./routes/user.routes"));
 app.use("/box", require("./routes/box.routes"));
-app.use("/search", require("./routes/search.routes"));
+app.use("/search", require("./routes/search.routes")); */
 //Exports
 module.exports = app;
