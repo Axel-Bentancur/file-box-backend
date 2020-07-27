@@ -2,6 +2,7 @@ const lobbyCtrl = {};
 const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const auth = require("../Helpers/auth");
 
 //------------------- USER/SIGNIN
 
@@ -41,7 +42,7 @@ lobbyCtrl.validToken = async (req, res) => {
     const user = await userModel.findById(verified.id);
     if (!user) return res.json(false);
 
-    return res.json({ user });
+    return res.json(true);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -50,13 +51,11 @@ lobbyCtrl.validToken = async (req, res) => {
 //------------------- SESSION
 
 lobbyCtrl.session = async (req, res) => {
-  const user = await userModel.findById(req.userDni);
+  const user = await userModel.findById(req.user);
   res.json({
+    user: user.dni,
     id: user._id,
-    user: user.user,
   });
 };
-
-//-----??????????????????????????????????????????
 
 module.exports = lobbyCtrl;
